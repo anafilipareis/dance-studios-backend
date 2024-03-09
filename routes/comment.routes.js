@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const router = require("express").Router();
 const mongoose = require("mongoose");
 
@@ -41,5 +39,5 @@ const app = express();
         res.status(400).json({ error: err.message });
       });
   });
->>>>>>> 3eb8862b99cabb786246e9f4121a517da69e4098
+
 
