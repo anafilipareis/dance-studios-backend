@@ -17,6 +17,7 @@ const mongoose = require("mongoose");
 const express = require('express');
 const DanceClass = require('../models/DanceClass.model');
 const { isAuthenticated } = require("../middleware/jwt.middleware");
+const { isTeacher } = require("../middleware/jwt.isTeacher");
 
 const app = express();
 
@@ -51,9 +52,9 @@ router.get("/dance-classes", (req, res) => {
 
   });
 
-  // POST /dance-classes: Create a new dance class.
+  // POST /dance-classes: Only teacher can Create a new dance class.
 
-router.post("/classes", isAuthenticated, isTeacher, (req, res, next) => {
+router.post("/create", isAuthenticated, isTeacher, (req, res, next) => {
     const { title, schedule, description, video, pictures } = req.body;
     const teacher = req.payload._id;
 
@@ -146,17 +147,5 @@ router.get("/users/:userId/favorites", isAuthenticated, (req, res) => {
       });
   });
   
-
-
-
-
-
-
-
-
-
-
-
-
 
   module.exports = router;

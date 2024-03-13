@@ -13,7 +13,8 @@ router.get('/profile', isAuthenticated, (req, res) => { //isAuthenticated ensure
   try {
     //  who the user is by looking at their unique identifier (ID) stored in the request.
     // This ID comes from JWT that was sent when the user logged in.
-    const userId = req.user.payload.sub; 
+    console.log(req.payload)
+    const userId = req.payload._id; 
 
     // Fetch user details from the database
     User.findById(userId)
@@ -41,7 +42,7 @@ router.get('/profile', isAuthenticated, (req, res) => { //isAuthenticated ensure
 router.put('/profile', isAuthenticated, (req, res) => {
   try {
     // We're finding out who the user is and getting the updated details they want to save.
-    const userId = req.user.payload.sub; // Extract user ID from the JWT payload
+    const userId = req.payload._id; // Extract user ID from the JWT payload
     const { username, email, password, firstName, lastName, status, profilePicture } = req.body;
 
     // We're telling the database to find the user with a specific ID and update their information

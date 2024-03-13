@@ -6,3 +6,7 @@ const isTeacher = (req, res, next) => {
         res.status(403).json ({ error: 'Only teachers are allowed to create dance classes.'});
     }
 };
+
+module.exports = {
+    isTeacher,
+  };

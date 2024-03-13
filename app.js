@@ -24,8 +24,11 @@ app.use("/auth", authRoutes);
 const profileRoutes = require("./routes/profile.routes");
 app.use("/profile", profileRoutes);
 
-// const danceClassRoutes = require("./routes/danceClass.routes");
-// app.use("/dance-classes", danceClassRoutes);
+const danceClassRoutes = require("./routes/danceClass.routes");
+app.use("/dance-classes", danceClassRoutes);
+
+const commentRoutes = require("./routes/comment.routes");
+app.use("/comments", commentRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
