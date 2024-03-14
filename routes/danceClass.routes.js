@@ -36,7 +36,8 @@ router.get("/dance-classes", (req, res) => {
 
   // GET /dance-classes/{id}: Retrieve details of a specific dance class by its ID.
 
-  router.get("dance-classes/:id" , isAuthenticated, (req, res) => {
+  router.get("/dance-classes/:id" , isAuthenticated, (req, res) => {
+
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
