@@ -37,7 +37,6 @@ router.get("/dance-classes", (req, res) => {
   // GET /dance-classes/{id}: Retrieve details of a specific dance class by its ID.
 
   router.get("/dance-classes/:id" , isAuthenticated, (req, res) => {
-
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
@@ -103,7 +102,7 @@ router.delete("/dance-classes/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
- 
+ // POST /dance-classes/{id}/favorites: Add the dance class to the user's favorites.
 
   router.post("/dance-classes/:id/favorites", isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
