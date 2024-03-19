@@ -9,7 +9,7 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 
 // Render private profile for authenticated users. "When someone goes to the '/profile' page, do the following:"
-router.get('/profile', isAuthenticated, (req, res) => { //isAuthenticated ensures the user is logged in before showing their private profile.
+router.get('/', isAuthenticated, (req, res) => { //isAuthenticated ensures the user is logged in before showing their private profile.
   try {
     //  who the user is by looking at their unique identifier (ID) stored in the request.
     // This ID comes from JWT that was sent when the user logged in.
