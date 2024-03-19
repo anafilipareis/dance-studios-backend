@@ -8,7 +8,8 @@ const User = require('../models/User.model');
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 
-// Render private profile for authenticated users. "When someone goes to the '/profile' page, do the following:"
+// Render private /profile/ for authenticated users. "When someone goes to the '/profile' page, do the following:"
+// /profile/
 router.get('/', isAuthenticated, (req, res) => { //isAuthenticated ensures the user is logged in before showing their private profile.
   try {
     //  who the user is by looking at their unique identifier (ID) stored in the request.
@@ -38,8 +39,9 @@ router.get('/', isAuthenticated, (req, res) => { //isAuthenticated ensures the u
   }
 });
 
-// Update user profile. "If someone wants to update their profile, do the following:"
-router.put('/profile', isAuthenticated, (req, res) => {
+// Update user profile. /profile/ "If someone wants to update their profile, do the following:"
+// /profile/
+router.put('/', isAuthenticated, (req, res) => {
   try {
     // We're finding out who the user is and getting the updated details they want to save.
     const userId = req.payload._id; // Extract user ID from the JWT payload
@@ -68,7 +70,8 @@ router.put('/profile', isAuthenticated, (req, res) => {
 });
 
 // Render public profile for any username. "If someone wants to see another person's profile, do the following:"
-router.get('/profile/:username', (req, res) => {
+// /profile/:username
+router.get('/:username', (req, res) => {
   try {
     //We're finding out who the user is based on their username.
     const username = req.params.username;

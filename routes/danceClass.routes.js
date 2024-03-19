@@ -23,9 +23,9 @@ const { isTeacher } = require("../middleware/jwt.isTeacher");
 const app = express();
 
 
-// GET /dance-classes: Retrieve a list of all dance classes.
+// GET /dance-classe/s: Retrieve a list of all dance classes.
 
-router.get("/dance-classes", (req, res) => {
+router.get("/", (req, res) => {
     DanceClass.find({})
       .then((allDanceClasses) => {
         res.json(allDanceClasses);
@@ -35,9 +35,9 @@ router.get("/dance-classes", (req, res) => {
       });
   });
 
-  // GET /dance-classes/{id}: Retrieve details of a specific dance class by its ID.
+  // GET /dance-classes/class/{id}: Retrieve details of a specific dance class by its ID.
 
-  router.get("/:id" , isAuthenticated, (req, res) => {
+  router.get("/class/:id" , isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
@@ -53,9 +53,9 @@ router.get("/dance-classes", (req, res) => {
 
   });
 
-  // POST /dance-classes: Only teacher can Create a new dance class.
+  // POST /dance-classes/class/create : Only teacher can Create a new dance class.
 
-router.post("/create", isAuthenticated, isTeacher, (req, res, next) => {
+router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
     const { title, schedule, description, video, pictures } = req.body;
     const teacher = req.payload._id;
 
@@ -103,9 +103,9 @@ router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
- // POST /dance-classes/{id}/favorites: Add the dance class to the user's favorites.
+ // POST /dance-classes/class/{id}/favorites: Add the dance class to the user's favorites.
 
-  router.post("/dance-classes/:id/favorites", isAuthenticated, (req, res) => {
+  router.post("/class/:id/favorites", isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
     const userId = req.payload._id;
   
@@ -130,7 +130,7 @@ router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
-  // GET /users/:userId/favorites - Retrieve a list of dance classes saved by a logged in user
+  // GET /dance-classes/users/:userId/favorites - Retrieve a list of dance classes saved by a logged in user
 router.get("/users/:userId/favorites", isAuthenticated, (req, res) => {
     const userId = req.params.userId;
   
