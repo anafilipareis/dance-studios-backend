@@ -36,7 +36,7 @@ router.get("/dance-classes", (req, res) => {
 
   // GET /dance-classes/{id}: Retrieve details of a specific dance class by its ID.
 
-  router.get("/dance-classes/:id" , isAuthenticated, (req, res) => {
+  router.get("/:id" , isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
@@ -63,8 +63,8 @@ router.post("/create", isAuthenticated, isTeacher, (req, res, next) => {
     .catch(err => res.status(400).json({ error: err.message }));
 });
 
-// PUT /dance-classes/:id - Update an existing dance class
-router.put("/dance-classes/:id", isAuthenticated, isTeacher, (req, res) => {
+// PUT dance-classes/class/:id - Update an existing dance class
+router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
     const { title, schedule, description, video, pictures } = req.body;
   
@@ -85,8 +85,8 @@ router.put("/dance-classes/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
-  // DELETE /dance-classes/:id - Delete a dance class
-router.delete("/dance-classes/:id", isAuthenticated, isTeacher, (req, res) => {
+  // DELETE dance-classes/class/:id - Delete a dance class
+router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
   
     // Find the dance class by ID and delete it
