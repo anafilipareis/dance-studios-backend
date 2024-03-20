@@ -103,50 +103,50 @@ router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
- // POST /dance-classes/class/{id}/favorites: Add the dance class to the user's favorites.
+//  // POST /dance-classes/class/{id}/favorites: Add the dance class to the user's favorites.
 
-  router.post("/class/:id/favorites", isAuthenticated, (req, res) => {
-    const danceClassId = req.params.id;
-    const userId = req.payload._id;
+//   router.post("/class/:id/favorites", isAuthenticated, (req, res) => {
+//     const danceClassId = req.params.id;
+//     const userId = req.payload._id;
   
-    // Find the user
-    User.findById(userId)
-      .then(user => {
-        if (!user) {
-          return res.status(404).json({ error: "User not found." });
-        }
+//     // Find the user
+//     User.findById(userId)
+//       .then(user => {
+//         if (!user) {
+//           return res.status(404).json({ error: "User not found." });
+//         }
   
-        // Add the dance class ID to favorites array
-        user.favouriteClasses.push(danceClassId);
+//         // Add the dance class ID to favorites array
+//         user.favouriteClasses.push(danceClassId);
   
         
-        return user.save();
-      })
-      .then(updatedUser => {
-        res.json(updatedUser);
-      })
-      .catch(err => {
-        res.status(400).json({ error: err.message });
-      });
-  });
+//         return user.save();
+//       })
+//       .then(updatedUser => {
+//         res.json(updatedUser);
+//       })
+//       .catch(err => {
+//         res.status(400).json({ error: err.message });
+//       });
+//   });
 
-  // GET /dance-classes/users/:userId/favorites - Retrieve a list of dance classes saved by a logged in user
-router.get("/users/:userId/favorites", isAuthenticated, (req, res) => {
-    const userId = req.params.userId;
+//   // GET /dance-classes/users/:userId/favorites - Retrieve a list of dance classes saved by a logged in user
+// router.get("/users/:userId/favorites", isAuthenticated, (req, res) => {
+//     const userId = req.params.userId;
   
-    // Find the user by ID and then we populate their favorite dance classes
-    User.findById(userId)
-      .populate('favouriteClasses')
-      .then(user => {
-        if (!user) {
-          return res.status(404).json({ error: "User not found." });
-        }
-        res.json(user.favouriteClasses);
-      })
-      .catch(err => {
-        res.status(400).json({ error: err.message });
-      });
-  });
+//     // Find the user by ID and then we populate their favorite dance classes
+//     User.findById(userId)
+//       .populate('favouriteClasses')
+//       .then(user => {
+//         if (!user) {
+//           return res.status(404).json({ error: "User not found." });
+//         }
+//         res.json(user.favouriteClasses);
+//       })
+//       .catch(err => {
+//         res.status(400).json({ error: err.message });
+//       });
+//   });
   
 
   module.exports = router;
