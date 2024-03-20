@@ -36,24 +36,24 @@ const userSchema = new Schema(
     profilePicture: {
       type: String, // Path or URL of the profile picture
     },
-    favouriteClasses: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "DanceClass", // DanceClass model
-      },
-    ],
+    // favouriteClasses: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "DanceClass", // DanceClass model
+    //   },
+    // ],
     comments: [
       {
         type: Schema.Types.ObjectId,
         ref: "Comment", // Comment model
       },
     ],
-    favoriteComments: [ // Users can like comments, and the total likes count will be stored in the Comment model.
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
-      },
-    ],
+    // favoriteComments: [ // Users can like comments, and the total likes count will be stored in the Comment model.
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Comment",
+    //   },
+    // ],
   },
   {
     timestamps: true,
