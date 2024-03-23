@@ -52,6 +52,19 @@ router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
     .catch(err => res.status(400).json({ error: err.message }));
 });
 
+// GET /dance-classes/teacher: Retrieve dance classes of the logged-in teacher.
+router.get("/teacher", isAuthenticated, isTeacher, (req, res) => {
+  const teacherId = req.payload._id; // Get the ID of the logged-in teacher
+  
+  DanceClass.find({ teacher: teacherId })
+      .then((teacherDanceClasses) => {
+          res.json(teacherDanceClasses);
+      })
+      .catch((err) => {
+          res.status(400).json({ error: err.message });
+      });
+});
+
 // PUT dance-classes/class/:id - Update an existing dance class
 router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
