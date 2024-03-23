@@ -11,7 +11,7 @@ const danceClassSchema = new Schema(
       ref: "User", 
       required: true,
     },
-    schedule: {
+    
       day: {
         type: String,
         required: [true, "Day is required."],
@@ -20,7 +20,7 @@ const danceClassSchema = new Schema(
         type: String,
         required: [true, "Time is required."],
       },
-    },
+  
     spotsLeft: {
       type: Number,
       default: 15, // maximum spots are 15

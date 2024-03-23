@@ -40,10 +40,10 @@ router.get("/", (req, res) => {
 
 // POST /dance-classes/class/create : Only teacher can Create a new dance class.
 router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
-    const { title, schedule, description, video, pictures } = req.body;
+    const { title, day, time, description, video, pictures } = req.body;
     const teacher = req.payload._id;
 
-    DanceClass.create({title, teacher, schedule, description, video, pictures, favorites:[], comments:[]})
+    DanceClass.create({title, teacher, day, time, description, video, pictures, favorites:[], comments:[]})
     .then(danceClass => res.json(danceClass))
     .catch(err => res.status(400).json({ error: err.message }));
 });
@@ -51,12 +51,13 @@ router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
 // PUT dance-classes/class/:id - Update an existing dance class
 router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
-    const { title, schedule, description, video, pictures } = req.body;
+    const { title, day, time, description, video, pictures } = req.body;
+    
   
     // Find the dance class by ID and update the danced class details
     DanceClass.findByIdAndUpdate(
       danceClassId,
-      { title, schedule, description, video, pictures },
+      { title, day, time, description, video, pictures },
       { new: true } // Return the updated dance class
     )
       .then(updatedDanceClass => {
