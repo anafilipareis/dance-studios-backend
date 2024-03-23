@@ -18,7 +18,7 @@ const express = require('express');
 const DanceClass = require('../models/DanceClass.model');
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 const { isTeacher } = require("../middleware/jwt.isTeacher");
-
+const fileUploader = require('../config/cloudinary.config');
 const app = express();
 
 

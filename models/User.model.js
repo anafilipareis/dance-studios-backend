@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const fileUploader = require('../config/cloudinary.config');
 
 const userSchema = new Schema(
   {
@@ -33,8 +34,8 @@ const userSchema = new Schema(
       enum: ["student", "teacher"],
       default: "student",
     },
-    profilePicture: {
-      type: String, // Path or URL of the profile picture
+    profilePictureUrl: {
+      type: String, 
     },
     favouriteClasses: [
       {
@@ -59,6 +60,20 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Middleware to handle profile picture upload
+userSchema.pre('save', async function(next) {
+  if (this.isModified('profilePicture')) {
+    try {
+      // Upload profile picture to Cloudinary and set the profilePictureUrl field
+      const uploadedPicture = await fileUploader.upload(this.profilePicture);
+      this.profilePictureUrl = uploadedPicture.secure_url;
+    } catch (error) {
+      console.error('Error uploading profile picture:', error);
+    }
+  }
+  next();
+});
 
 const User = model("User", userSchema);
 
