@@ -5,8 +5,8 @@ const Comment = require('../models/Comment.model');
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 
- // POST /dance-classes/:id/comment - Add a comment to a specific dance class
- router.post("/:id/comment", isAuthenticated, (req, res) => {
+ // POST /comments/class/:id/ - Add a comment to a specific dance class
+ router.post("/class/:id", isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
     const { comment } = req.body;
     const userId = req.payload._id;

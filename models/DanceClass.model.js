@@ -39,12 +39,12 @@ const danceClassSchema = new Schema(
         type: String, // path or URL of each picture
       },
     ],
-    favorites: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User", 
-      },
-    ],
+    // favorites: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User", 
+    //   },
+    // ],
     comments: [
         {
           type: Schema.Types.ObjectId,
