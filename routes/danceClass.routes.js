@@ -1,16 +1,3 @@
-// GET /dance-classes: Retrieve a list of all dance classes.
-// GET /dance-classes/{id}: Retrieve details of a specific dance class by its ID.
-// POST /dance-classes: Create a new dance class.
-// PUT /dance-classes/{id}: Update an existing dance class.
-// DELETE /dance-classes/{id}: Delete a dance class.
-// POST /dance-classes/{id}/comments: Add a comment to a specific dance class.
-// POST /dance-classes/{id}/favorites: Add the dance class to the user's favorites.
-// GET /users/{userId}/favorites: Retrieve a list of dance classes favorited by a user.
-
-
-
-
-
 const router = require("express").Router();
 const mongoose = require("mongoose");
 // ********* require fileUploader in order to use it *********
@@ -23,8 +10,7 @@ const { isTeacher } = require("../middleware/jwt.isTeacher");
 const app = express();
 
 
-// GET /dance-classe/s: Retrieve a list of all dance classes.
-
+// GET /dance-classes/: Retrieve a list of all dance classes.
 router.get("/", (req, res) => {
     DanceClass.find({})
       .then((allDanceClasses) => {
@@ -35,8 +21,7 @@ router.get("/", (req, res) => {
       });
   });
 
-  // GET /dance-classes/class/{id}: Retrieve details of a specific dance class by its ID.
-
+// GET /dance-classes/class/{id}: Retrieve details of a specific dance class by its ID.
   router.get("/class/:id" , isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
 
@@ -53,8 +38,7 @@ router.get("/", (req, res) => {
 
   });
 
-  // POST /dance-classes/class/create : Only teacher can Create a new dance class.
-
+// POST /dance-classes/class/create : Only teacher can Create a new dance class.
 router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
     const { title, schedule, description, video, pictures } = req.body;
     const teacher = req.payload._id;
@@ -86,7 +70,7 @@ router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
-  // DELETE dance-classes/class/:id - Delete a dance class
+// DELETE dance-classes/class/:id - Delete a dance class
 router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
   
@@ -103,50 +87,5 @@ router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       });
   });
 
-//  // POST /dance-classes/class/{id}/favorites: Add the dance class to the user's favorites.
 
-//   router.post("/class/:id/favorites", isAuthenticated, (req, res) => {
-//     const danceClassId = req.params.id;
-//     const userId = req.payload._id;
-  
-//     // Find the user
-//     User.findById(userId)
-//       .then(user => {
-//         if (!user) {
-//           return res.status(404).json({ error: "User not found." });
-//         }
-  
-//         // Add the dance class ID to favorites array
-//         user.favouriteClasses.push(danceClassId);
-  
-        
-//         return user.save();
-//       })
-//       .then(updatedUser => {
-//         res.json(updatedUser);
-//       })
-//       .catch(err => {
-//         res.status(400).json({ error: err.message });
-//       });
-//   });
-
-//   // GET /dance-classes/users/:userId/favorites - Retrieve a list of dance classes saved by a logged in user
-// router.get("/users/:userId/favorites", isAuthenticated, (req, res) => {
-//     const userId = req.params.userId;
-  
-//     // Find the user by ID and then we populate their favorite dance classes
-//     User.findById(userId)
-//       .populate('favouriteClasses')
-//       .then(user => {
-//         if (!user) {
-//           return res.status(404).json({ error: "User not found." });
-//         }
-//         res.json(user.favouriteClasses);
-//       })
-//       .catch(err => {
-//         res.status(400).json({ error: err.message });
-//       });
-//   });
-  
-
-  module.exports = router;
+module.exports = router;
