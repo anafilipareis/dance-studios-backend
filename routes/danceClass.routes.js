@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 // ********* require fileUploader in order to use it *********
-const fileUploader = require('../config/cloudinary.config');
+
 const express = require('express');
 const DanceClass = require('../models/DanceClass.model');
 const { isAuthenticated } = require("../middleware/jwt.middleware");
