@@ -34,7 +34,10 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
         return danceClass.save();
       })
       .then(updatedDanceClass => {
-        res.json(updatedDanceClass);
+        createdComment.populate("user").then((commentPopulated) => {
+           res.json(commentPopulated);
+        })
+       
       })
     })
       .catch(err => {

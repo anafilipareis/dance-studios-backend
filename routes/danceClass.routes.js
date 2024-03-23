@@ -26,7 +26,11 @@ router.get("/", (req, res) => {
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
-     .then((danceClass) => {
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' }
+  })
+    .then((danceClass) => {
         if (!danceClass) {
             return res.status(404).json({ error: 'Sorry, we did not find the class.' });
         }
@@ -60,6 +64,10 @@ router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
       { title, day, time, description, video, pictures },
       { new: true } // Return the updated dance class
     )
+    .populate({
+      path: 'comments',
+      populate: { path: 'user' }
+  })
       .then(updatedDanceClass => {
         if (!updatedDanceClass) {
           return res.status(404).json({ error: "Dance class not found." });
