@@ -14,10 +14,15 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     allowed_formats: ['jpg', 'png'],
-    folder: 'dance-kingdom-folder' // The name of the folder in cloudinary
+    folder: 'DanceKingdom', 
+    transformation: [{ width: 500, height: 500, crop: 'limit' }] // The name of the folder in cloudinary
     // resource_type: 'raw' => this is in case you want to upload other type of files, not just images
   }
 });
- 
-//                     storage: storage
-module.exports = multer({ storage });
+const fileUploader = multer({ storage });
+ module.exports = fileUploader
+
+
+
+// storage: storage
+// module.exports = multer({ storage });
