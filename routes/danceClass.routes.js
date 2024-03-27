@@ -13,6 +13,7 @@ const app = express();
 // GET /dance-classes/: Retrieve a list of all dance classes.
 router.get("/", (req, res) => {
     DanceClass.find({})
+    .populate('teacher')
       .then((allDanceClasses) => {
         res.json(allDanceClasses);
       })
@@ -26,9 +27,7 @@ router.get("/", (req, res) => {
     const danceClassId = req.params.id;
 
     DanceClass.findById(danceClassId)
-    // .populate( {
-    //   path: 'teacher', populate: { path: 'firstName' } 
-    // })
+    .populate('teacher')
     .populate({
       path: 'comments',
       populate: { path: 'user' }
