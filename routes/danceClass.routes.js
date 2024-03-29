@@ -58,7 +58,7 @@ router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
 
 // GET /dance-classes/teacher: Retrieve dance classes of the logged-in teacher.
 router.get("/teacher", isAuthenticated, isTeacher, (req, res) => {
-  const teacherId = req.payload._id; // Get the ID of the logged-in teacher
+  const teacherId = req.payload._id; 
   
   DanceClass.find({ teacher: teacherId })
       .then((teacherDanceClasses) => {
