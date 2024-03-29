@@ -3,7 +3,6 @@
 
 ## [See the App!](https://dancekingdom.netlify.app/)
 
-![App Logo](/assets/dancerlogo.png)
 
 ## Description
 
@@ -120,6 +119,7 @@ This is a Dance Studio app for Teachers and Students that. Teachers are able to 
 ### Project
 
 [Front End Repository Link](hhttps://github.com/anafilipareis/dance-studios-frontent.git)
+
 [Back End Repository Link](https://github.com/anafilipareis/dance-studios-backend.git)
 
 [Deploy Link](https://dancekingdom.netlify.app/)
