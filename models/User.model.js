@@ -61,11 +61,11 @@ const userSchema = new Schema(
   }
 );
 
-// Middleware to handle profile picture upload
+
 userSchema.pre('save', async function(next) {
   if (this.isModified('profilePicture')) {
     try {
-      // Upload profile picture to Cloudinary and set the profilePictureUrl field
+   
       const uploadedPicture = await fileUploader.upload(this.profilePicture);
       this.profilePictureUrl = uploadedPicture.secure_url;
     } catch (error) {
