@@ -15,7 +15,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
       danceClass: danceClassId,
       text: comment,
       user: userId,
-      likesCount: 0, // Initialize likesCount to 0
+      likesCount: 0, 
     };
   
     Comment.create(newComment).then((createdComment) => {
@@ -27,7 +27,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
           return res.status(404).json({ error: "Dance class not found." });
         }
   
-        // Add the comment to the array
+     
         danceClass.comments.push(createdComment._id);
   
         

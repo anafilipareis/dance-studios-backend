@@ -16,11 +16,11 @@ const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 // How many rounds should bcrypt run the salt (default - 10 rounds)
 const saltRounds = 10;
 
-// POST /auth/signup  - Creates a new user in the database
+// POST /auth/signup  - this creates a new user in  the database
 router.post("/signup", (req, res, next) => {
   const { email, password, firstName, lastName, username, status } = req.body;
 
-  // Check if email or password or name are provided as empty strings
+ 
   if (email === "" || password === "" || firstName === "" || lastName === "" || username === "" || status === "") {
     res.status(400).json({ message: "Please provide all required fields." });
     return;
@@ -130,6 +130,3 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
 
 module.exports = router;
 
-
-//the /verify route serves as a way for the client to confirm the authenticity of the user by providing a valid JWT.
-//The server decodes the JWT, retrieves the user data from the payload, and sends it back to the client for verification.

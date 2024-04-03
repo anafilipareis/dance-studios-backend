@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-// ********* require fileUploader in order to use it *********
+
 
 const express = require('express');
 const DanceClass = require('../models/DanceClass.model');
@@ -10,7 +10,7 @@ const fileUploader = require('../config/cloudinary.config');
 const app = express();
 
 
-// GET /dance-classes/: Retrieve a list of all dance classes.
+// GET /dance-classes/ - all of the classes from every teacher
 router.get("/", (req, res) => {
     DanceClass.find({})
     .populate('teacher')
@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
       });
   });
 
-// GET /dance-classes/class/{id}: Retrieve details of a specific dance class by its ID.
+// GET /dance-classes/class/{id}: only the classes from the teacher who logged in (ask Ana if she is okay to keep the this)
   router.get("/class/:id" , isAuthenticated, (req, res) => {
     const danceClassId = req.params.id;
 
@@ -46,7 +46,7 @@ router.get("/", (req, res) => {
 
   });
 
-// POST /dance-classes/class/create : Only teacher can Create a new dance class.
+// POST /dance-classes/class/create 
 router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
     const { title, day, time, description, video, pictures } = req.body;
     const teacher = req.payload._id;
@@ -56,7 +56,7 @@ router.post("/class/create", isAuthenticated, isTeacher, (req, res, next) => {
     .catch(err => res.status(400).json({ error: err.message }));
 });
 
-// GET /dance-classes/teacher: Retrieve dance classes of the logged-in teacher.
+// GET /dance-classes/teacher
 router.get("/teacher", isAuthenticated, isTeacher, (req, res) => {
   const teacherId = req.payload._id; 
   
@@ -69,17 +69,17 @@ router.get("/teacher", isAuthenticated, isTeacher, (req, res) => {
       });
 });
 
-// PUT dance-classes/class/:id - Update an existing dance class
+// PUT dance-classes/class/:id - 
 router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
     const { title, day, time, description, video, pictures } = req.body;
     
   
-    // Find the dance class by ID and update the danced class details
+    
     DanceClass.findByIdAndUpdate(
       danceClassId,
       { title, day, time, description, video, pictures },
-      { new: true } // Return the updated dance class
+      { new: true } 
     )
     .populate({
       path: 'comments',
@@ -89,18 +89,18 @@ router.put("/class/:id", isAuthenticated, isTeacher, (req, res) => {
         if (!updatedDanceClass) {
           return res.status(404).json({ error: "Dance class not found." });
         }
-        res.json(updatedDanceClass); // Return the updated dance class
+        res.json(updatedDanceClass); 
       })
       .catch(err => {
         res.status(400).json({ error: err.message }); 
       });
   });
 
-// DELETE dance-classes/class/:id - Delete a dance class
+// DELETE dance-classes/class/:id 
 router.delete("/class/:id", isAuthenticated, isTeacher, (req, res) => {
     const danceClassId = req.params.id;
   
-    // Find the dance class by ID and delete it
+
     DanceClass.findByIdAndDelete(danceClassId)
       .then(deletedDanceClass => {
         if (!deletedDanceClass) {
