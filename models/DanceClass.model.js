@@ -23,7 +23,7 @@ const danceClassSchema = new Schema(
   
     spotsLeft: {
       type: Number,
-      default: 15, // maximum spots are 15
+      default: 15, 
       min: 0,
       max: 15,
     },
@@ -32,19 +32,14 @@ const danceClassSchema = new Schema(
       required: [true, "Description is required."],
     },
     video: {
-      type: String, // path or URL of the video
+      type: String, 
     },
     pictures: [
       {
-        type: String, // path or URL of each picture
+        type: String, 
       },
     ],
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "User", 
-    //   },
-    // ],
+ 
     comments: [
         {
           type: Schema.Types.ObjectId,
@@ -62,4 +57,4 @@ const DanceClass = model("DanceClass", danceClassSchema);
 module.exports = DanceClass;
 
 
-// About the Teacher ? Is it too much ? 
+

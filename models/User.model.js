@@ -49,12 +49,7 @@ const userSchema = new Schema(
         ref: "Comment", // Comment model
       },
     ],
-    // favoriteComments: [ // Users can like comments, and the total likes count will be stored in the Comment model.
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Comment",
-    //   },
-    // ],
+   
   },
   {
     timestamps: true,

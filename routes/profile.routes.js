@@ -9,7 +9,7 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 
 
-// Render private profile for authenticated users. "When someone goes to the '/profile' page, do the following:"
+
 router.get('/', isAuthenticated, (req, res) => { 
   try {
  
@@ -29,7 +29,6 @@ router.get('/', isAuthenticated, (req, res) => {
           return res.status(404).json({ message: 'User not found' });
         }
 
-        // Render the private profile page with user details
         res.json({ user });
       });
   } catch (error) {
